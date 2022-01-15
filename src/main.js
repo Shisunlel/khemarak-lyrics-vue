@@ -1,4 +1,9 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+import { createApp } from "vue";
+import App from "./App.vue";
 
-createApp(App).mount('#app')
+import TheSidebar from "./pages/TheSidebar";
+
+const app = createApp(App);
+app.component("TheSidebar", TheSidebar);
+
+app.mount("#app");

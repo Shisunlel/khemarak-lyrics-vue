@@ -1,26 +1,50 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <the-sidebar></the-sidebar>
+  <main>
+    <new-songs></new-songs>
+  </main>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import NewSongs from "./components/NewSongs.vue";
 export default {
-  name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    NewSongs,
+  },
+};
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&display=swap");
+
+:root {
+  --green: #30c36b;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  display: flex;
+  color: #e4e4e4;
+  font-family: "Jost", sans-serif;
+  min-height: 100vh;
+}
+
+main {
+  background: linear-gradient(0deg, #151515 0%, #292929 100%);
+  padding: 2rem;
+  width: 100%;
 }
 </style>
