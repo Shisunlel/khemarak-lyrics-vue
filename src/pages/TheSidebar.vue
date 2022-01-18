@@ -1,7 +1,7 @@
 <template>
   <nav class="nav">
     <div class="nav-container">
-      <a href="#" class="nav-brand">
+      <a href="/" class="nav-brand">
         <svg
           width="49"
           height="74"
@@ -141,6 +141,7 @@
 .nav {
   display: none;
   width: 200px;
+  position: fixed;
   min-height: 100vh;
   background: linear-gradient(180deg, #151515 0%, #292929 100%);
   box-shadow: 3px 0px 5px 0px #2424244d;

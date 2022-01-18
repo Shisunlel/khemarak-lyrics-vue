@@ -1,75 +1,65 @@
 <template>
   <section id="new-song" class="container">
     <h2>New Songs</h2>
-    <div class="card-item">
-      <base-card v-for="song in newSongs" :key="song.id"
-        :href="song.url"
-        :src="song.imageUrl"
+    <div v-if="$apollo.queries.songs.loading">Loading...</div>
+    <transition-group v-if="!$apollo.queries.songs.loading || animate" class="card-item" tag="div">
+      <base-card
+        v-for="song in songs.data"
+        :key="song.id"
+        :href="song.artist.name"
+        :src="song.album.cover"
       >
         <template #card-title>
           <h4>{{ song.title }}</h4>
         </template>
         <template #card-body>
-          <em>{{ song.artist }}</em>
+          <em>{{ song.artist.name }}</em>
         </template>
         <template #card-footer>
           <p>{{ song.lyrics }}</p>
         </template>
       </base-card>
-    </div>
+    </transition-group>
   </section>
 </template>
 <script>
+import gql from "graphql-tag";
 import BaseCard from "./BaseCard.vue";
 export default {
+  apollo: {
+    songs: {
+      query: gql`
+        query {
+          songs(first: 8) {
+            data {
+              id
+              title
+              artist {
+                name
+                image
+              }
+              album {
+                name
+                cover
+              }
+              length
+              track
+              disc
+              lyrics
+            }
+          }
+        }
+      `,
+    },
+  },
   components: {
     BaseCard,
   },
-  data(){
-      return {
-          newSongs: [
-              {
-                  id: 1,
-                  url: '#',
-                  imageUrl: 'https://i.ytimg.com/vi/VJgEx4iTnLU/maxresdefault.jpg',
-                  title: 'First Kiss',
-                  artist: 'SWSB',
-                  lyrics: 'She\'s not a killer btw',
-              },
-              {
-                  id: 2,
-                  url: '#',
-                  imageUrl: 'https://i.ytimg.com/vi/VJgEx4iTnLU/maxresdefault.jpg',
-                  title: 'First Kiss',
-                  artist: 'SWSB',
-                  lyrics: 'She\'s not a killer btw',
-              },
-              {
-                  id: 3,
-                  url: '#',
-                  imageUrl: 'https://i.ytimg.com/vi/VJgEx4iTnLU/maxresdefault.jpg',
-                  title: 'First Kiss',
-                  artist: 'SWSB',
-                  lyrics: 'She\'s not a killer btw',
-              },
-              {
-                  id: 4,
-                  url: '#',
-                  imageUrl: 'https://i.ytimg.com/vi/VJgEx4iTnLU/maxresdefault.jpg',
-                  title: 'First Kiss',
-                  artist: 'SWSB',
-                  lyrics: 'She\'s not a killer btw',
-              },
-              {
-                  id: 5,
-                  url: '#',
-                  imageUrl: 'https://i.ytimg.com/vi/VJgEx4iTnLU/maxresdefault.jpg',
-                  title: 'First Kiss',
-                  artist: 'SWSB',
-                  lyrics: 'She\'s not a killer btw',
-              },
-          ]
-      }
+  props: ["animate"],
+  data() {
+    return {
+      songs: [],
+    };
   }
 };
 </script>
@@ -78,6 +68,10 @@ export default {
   margin: 1rem 0 0 0;
   display: grid;
   place-items: center;
+}
+
+.container > h2{
+  color: var(--sky);
 }
 
 .card-item {
@@ -89,6 +83,21 @@ export default {
 
 .card-item > .card {
   place-items: center;
+}
+
+.v-enter-active {
+  animation: slide-in 500ms ease-out;
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(10rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media only screen and (min-width: 992px) {

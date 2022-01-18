@@ -1,15 +1,18 @@
 <template>
   <the-sidebar></the-sidebar>
   <main>
-    <new-songs></new-songs>
+    <new-songs :animate="1"/>
+    <hot-artists :animate="1"/>
   </main>
 </template>
 
 <script>
 import NewSongs from "./components/NewSongs.vue";
+import HotArtists from './components/HotArtists.vue'
 export default {
   components: {
     NewSongs,
+    HotArtists
   },
 };
 </script>
@@ -19,6 +22,7 @@ export default {
 
 :root {
   --green: #30c36b;
+  --sky: #0EA5E9;
 }
 * {
   margin: 0;
@@ -46,5 +50,12 @@ main {
   background: linear-gradient(0deg, #151515 0%, #292929 100%);
   padding: 2rem;
   width: 100%;
+  margin-left: 0;
+}
+
+@media only screen and (min-width: 992px) {
+  main{
+    margin-left: 200px;
+  }
 }
 </style>
