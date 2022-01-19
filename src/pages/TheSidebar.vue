@@ -1,7 +1,7 @@
 <template>
   <nav class="nav">
     <div class="nav-container">
-      <a href="/" class="nav-brand">
+      <router-link to="/" class="nav-brand">
         <svg
           width="49"
           height="74"
@@ -57,7 +57,7 @@
             />
           </defs>
         </svg>
-      </a>
+      </router-link>
       <ul class="nav-list">
         <li class="nav-item">
           <a href="#">
@@ -133,75 +133,10 @@
           </a>
         </li>
       </ul>
-      <span class="nav-footer"> Shisun </span>
+      <ul class="nav-footer"> <li> <router-link :to="{ name: 'request' }">Submit A Lyric</router-link></li> <li> &copy; 2022 Khemarak Lyrics </li> </ul>
     </div>
   </nav>
 </template>
-<style scoped>
-.nav {
-  display: none;
-  width: 200px;
-  position: fixed;
-  min-height: 100vh;
-  background: linear-gradient(180deg, #151515 0%, #292929 100%);
-  box-shadow: 3px 0px 5px 0px #2424244d;
-}
-
-.nav-container {
-  display: flex;
-  min-height: inherit;
-  flex-direction: column;
-  justify-content: space-around;
-  place-items: center;
-}
-
-.nav-brand {
-  width: 50px;
-  height: 50px;
-}
-
-.nav-list {
-  display: flex;
-  flex-direction: column;
-  place-items: center;
-}
-
-.nav-item {
-  width: 100%;
-  padding: 1rem 0;
-  position: relative;
-  text-align: center;
-}
-
-.nav-item a {
-  width: 3rem;
-  display: inline-block;
-  transition: transform 0.5s cubic-bezier(0.39, 0.575, 0.565, 1);
-}
-
-.nav-item:nth-of-type(2)::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  background: linear-gradient(180deg, var(--green) 100%, #33b687 0%);
-  width: 2px;
-  height: 100%;
-}
-
-.nav-item.active a svg {
-  color: var(--green);
-}
-
-@media (hover: hover) {
-  .nav-item a:hover {
-    transform: scale(0.8);
-  }
-}
-
-@media only screen and (min-width: 992px) {
-  .nav {
-    display: block;
-  }
-}
+<style lang="scss" scoped>
+@import '@/assets/scss/sidebar.scss'
 </style>
