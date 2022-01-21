@@ -1,6 +1,6 @@
 <template>
     <div class="overlay" v-if="show"></div>
-    <dialog open v-if="show">This is an open dialog window</dialog>
+    <dialog open v-if="show">Request has been submitted.</dialog>
 </template>
 <script>
 export default ({

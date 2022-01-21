@@ -1,0 +1,131 @@
+$hasBody: true;
+$hasFooter: true;
+
+@mixin translateY($y) {
+  transform: translateY($y);
+}
+
+.card {
+  display: flex;
+  position: relative;
+  max-width: 30ch;
+  min-height: 30ch;
+  margin: 1rem 0.5rem 1rem 0.5rem;
+  box-shadow: 2px 2px 0px 0px rgba(68, 66, 66, 0.25);
+  overflow: hidden;
+  transition: all 250ms ease-out;
+
+  & > a {
+    height: 100%;
+  }
+
+  & img {
+    width: 100%;
+    min-height: 100%;
+    filter: brightness(0.8);
+    object-fit: cover;
+    transition: transform 250ms ease;
+    will-change: transform;
+  }
+
+  & > .card-content {
+    position: absolute;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.63);
+    /* color: var(--green); */
+    bottom: 0;
+    padding: 1rem;
+    transform: translateY(0);
+    text-align: left;
+    transition: all 250ms ease-out;
+    will-change: transform, text-align;
+    pointer-events: none;
+  }
+}
+
+.container {
+  margin: 1rem 0 0 0;
+  display: grid;
+  place-items: center;
+
+  & > h2 {
+    color: var(--sky);
+  }
+}
+
+.card-item {
+  display: grid;
+  grid-template-columns: 1fr;
+  /* padding: 2rem 0; */
+  margin: 1rem 0 0 0;
+
+  & > .card {
+    place-items: center;
+  }
+}
+
+@if $hasBody{
+  .card-body {
+    margin-bottom: 1rem;
+    color: var(--green);
+  }
+}
+
+@if $hasFooter{
+  .card-footer p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    /* fallback */
+    max-height: 10ch;
+    /* fallback */
+    -webkit-line-clamp: 3;
+    /* number of lines to show */
+    -webkit-box-orient: vertical;
+  }
+}
+
+@media (hover: hover) {
+  .card:hover {
+    transform: perspective(30ch) translateZ(-2px);
+    box-shadow: 2px 2px 0px 0px var(--green);
+    & > .card-content {
+      top: 0;
+      transform: translateY(0);
+      text-align: center;
+    }
+  }
+
+  @if $hasFooter{
+    .card:hover .card-footer {
+      display: block;
+    }
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .card {
+    & > .card-content {
+      @include translateY(20%);
+    }
+  }
+
+  .container {
+    place-items: stretch;
+  }
+
+  .card-item {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  @if $hasFooter{
+    .card-footer {
+      display: none;
+  
+      & > p {
+        max-height: none;
+        -webkit-line-clamp: 7;
+      }
+    }
+  }
+}

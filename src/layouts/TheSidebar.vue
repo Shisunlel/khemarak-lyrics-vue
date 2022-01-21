@@ -1,7 +1,7 @@
 <template>
   <nav class="nav">
     <div class="nav-container">
-      <router-link to="/" class="nav-brand">
+      <router-link :to="{ name: 'home' }" class="nav-brand">
         <svg
           width="49"
           height="74"
@@ -60,7 +60,7 @@
       </router-link>
       <ul class="nav-list">
         <li class="nav-item">
-          <a href="#">
+          <router-link :to="{ name: 'songs' }">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-6 w-6"
@@ -75,11 +75,11 @@
                 d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"
               />
             </svg>
-          </a>
+          </router-link>
         </li>
         <hr width="200px" color="#383838" />
         <li class="nav-item active">
-          <a href="#">
+          <a href="/shuffle">
             <svg
               stroke-width="1.5"
               viewBox="0 0 24 24"
@@ -115,7 +115,7 @@
         </li>
         <hr width="200px" color="#383838" />
         <li class="nav-item">
-          <a href="#">
+          <router-link :to="{ name: 'artists' }">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-6 w-6"
@@ -130,13 +130,18 @@
                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
               />
             </svg>
-          </a>
+          </router-link>
         </li>
       </ul>
-      <ul class="nav-footer"> <li> <router-link :to="{ name: 'request' }">Submit A Lyric</router-link></li> <li> &copy; 2022 Khemarak Lyrics </li> </ul>
+      <ul class="nav-footer">
+        <li>
+          <router-link :to="{ name: 'request' }">Submit A Lyric</router-link>
+        </li>
+        <li>&copy; 2022 Khemarak Lyrics</li>
+      </ul>
     </div>
   </nav>
 </template>
 <style lang="scss" scoped>
-@import '@/assets/scss/sidebar.scss'
+@import "@/assets/scss/sidebar.scss";
 </style>

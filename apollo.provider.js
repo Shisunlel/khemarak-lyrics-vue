@@ -7,7 +7,7 @@ const cache = new InMemoryCache();
 // Create the apollo client
 const apolloClient = new ApolloClient({
   cache,
-  uri: "http://localhost:8000/khemarakql",
+  uri: "http://127.0.0.1:8000/khemarakql",
   credentials: 'same-origin',
 });
 

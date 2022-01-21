@@ -1,7 +1,11 @@
 <template>
   <sidebar />
   <main>
-    <router-view />
+    <router-view v-slot="component">
+      <transition>
+        <component :is='component.Component'></component>
+      </transition>
+    </router-view>
   </main>
 </template>
 

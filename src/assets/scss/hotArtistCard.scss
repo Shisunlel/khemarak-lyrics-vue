@@ -1,0 +1,28 @@
+@use './card.scss';
+
+$hasBody: false;
+$hasFooter: false;
+
+@media (hover: hover) {
+  .card:hover {
+    
+    & > .card-content {
+      
+
+      & > .card-title {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .card {
+    & > .card-content {
+      @include card.translateY(10%);
+    }
+  }
+}
