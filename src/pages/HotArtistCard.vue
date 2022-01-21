@@ -1,17 +1,11 @@
 <template>
   <div class="card">
-    <router-link :to="{ name: 'song', params: { title: link, id: id}}">
+    <a :href="href">
       <img :src="src" alt="" />
-    </router-link>
+    </a>
     <div class="card-content">
       <div class="card-title">
         <slot name="card-title"></slot>
-      </div>
-      <div class="card-body">
-        <slot name="card-body"></slot>
-      </div>
-      <div class="card-footer">
-        <slot name="card-footer"></slot>
       </div>
     </div>
   </div>
@@ -21,13 +15,7 @@ export default {
   props: {
     href: String,
     src: String,
-    id: String
   },
-  computed: {
-    link(){
-      return this.href.toLowerCase().replaceAll(/ /g, '-')
-    }
-  }
 };
 </script>
 <style scoped>
@@ -69,23 +57,6 @@ export default {
   pointer-events: none;
 }
 
-.card-body {
-  margin-bottom: 1rem;
-  color: var(--green);
-}
-
-.card-footer p {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  /* fallback */
-  max-height: 10ch;
-  /* fallback */
-  -webkit-line-clamp: 3;
-  /* number of lines to show */
-  -webkit-box-orient: vertical;
-}
-
 @media (hover: hover) {
   .card:hover > .card-content {
     top: 0;
@@ -93,28 +64,22 @@ export default {
     text-align: center;
   }
 
+  .card:hover > .card-content > .card-title{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+  }
+
   .card:hover {
     transform: perspective(30ch) translateZ(-2px);
     box-shadow: 2px 2px 0px 0px var(--green);
-  }
-
-  .card:hover .card-footer {
-    display: block;
   }
 }
 
 @media only screen and (min-width: 992px) {
   .card > .card-content {
-    transform: translateY(20%);
-  }
-
-  .card-footer {
-    display: none;
-  }
-
-  .card-footer > p {
-    max-height: none;
-    -webkit-line-clamp: 7;
+    transform: translateY(10%);
   }
 }
 </style>
