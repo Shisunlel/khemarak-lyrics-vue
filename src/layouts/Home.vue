@@ -4,8 +4,8 @@
 </template>
 
 <script>
-import NewSongs from "../components/NewSong.vue";
-import HotArtists from "../components/HotArtists.vue";
+import NewSongs from "../pages/NewSong.vue";
+import HotArtists from "../pages/HotArtists.vue";
 export default {
   components: {
     NewSongs,

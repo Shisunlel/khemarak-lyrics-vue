@@ -1,8 +1,8 @@
 <template>
   <div class="card">
-    <a :href="href">
+    <router-link :to="{ name: 'song', params: { title: link, id: id}}">
       <img :src="src" alt="" />
-    </a>
+    </router-link>
     <div class="card-content">
       <div class="card-title">
         <slot name="card-title"></slot>
@@ -21,7 +21,13 @@ export default {
   props: {
     href: String,
     src: String,
+    id: String
   },
+  computed: {
+    link(){
+      return this.href.toLowerCase().replaceAll(/ /g, '-')
+    }
+  }
 };
 </script>
 <style scoped>

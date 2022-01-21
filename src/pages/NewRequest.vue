@@ -61,8 +61,8 @@
 
 <script>
 import gql from "graphql-tag";
-import BaseInput from "./BaseInput.vue";
-import BaseDialog from './BaseDialog.vue'
+import BaseInput from "../components/BaseInput.vue";
+import BaseDialog from '../components/BaseDialog.vue'
 export default {
   data() {
     return {

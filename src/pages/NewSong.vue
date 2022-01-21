@@ -8,6 +8,7 @@
         :key="song.id"
         :href="song.artist.name"
         :src="song.album.cover"
+        :id="song.id"
       >
         <template #card-title>
           <h4>{{ song.title }}</h4>
@@ -24,7 +25,7 @@
 </template>
 <script>
 import gql from "graphql-tag";
-import BaseCard from "./BaseCard.vue";
+import BaseCard from "../components/BaseCard.vue";
 export default {
   apollo: {
     songs: {
