@@ -1,9 +1,20 @@
 <template>
   <div class="lyrics-cont">
-    <h2>{{ song.title }}</h2>
-    <p class="pre">
-      {{ song.lyrics }}
-    </p>
+    <ul>
+      <li>
+        <h2>"{{ song.title }}"</h2>
+      </li>
+      <li>
+        <h4>
+          <em>{{ song.artist.name }}</em>
+        </h4>
+      </li>
+      <li>
+        <p class="pre">
+          {{ song.lyrics }}
+        </p>
+      </li>
+    </ul>
   </div>
 </template>
 <script>
@@ -51,12 +62,18 @@ export default {
 };
 </script>
 <style scoped>
-.lyrics-cont{
-    display: grid;
-    place-items: center;
-    text-align: center;
+.lyrics-cont {
+  display: grid;
+  place-items: center;
+  text-align: center;
 }
-.pre{
-    white-space: pre-line;
+.pre {
+  white-space: pre-line;
+}
+h2{
+  color: var(--green);
+}
+li{
+  margin-bottom: 2rem;
 }
 </style>
