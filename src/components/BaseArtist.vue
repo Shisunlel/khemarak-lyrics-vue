@@ -6,7 +6,7 @@
         v-for="song in songs.data"
         :key="song.id"
         :href="song.artist.name"
-        :src="song.album.cover"
+        :src="song.album?.cover ?? song.artist.image"
         :title="song.title"
       >
         <template #card-title>
@@ -57,6 +57,7 @@ export default {
                 lyrics
                 artist{
                     name
+                    image
                 }
                 album{
                     cover

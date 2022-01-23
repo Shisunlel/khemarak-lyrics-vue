@@ -7,7 +7,7 @@
         v-for="song in songs.data"
         :key="song.id"
         :href="song.artist.name"
-        :src="song.album.cover"
+        :src="song.album?.cover ?? song.artist.image"
         :title="song.title"
       >
         <template #card-title>
@@ -31,7 +31,7 @@ export default {
     songs: {
       query: gql`
         query {
-          songs(first: 8) {
+          songs(first: 8, orderBy: [{column: CREATED_AT, order: DESC}]) {
             data {
               id
               title
