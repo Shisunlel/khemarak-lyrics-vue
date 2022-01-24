@@ -3,7 +3,7 @@
     width: 200px;
     position: fixed;
     min-height: 100vh;
-    background: linear-gradient(180deg, #151515 0%, #292929 100%);
+    background: var(--main-bg);
     box-shadow: 3px 0px 5px 0px #2424244d;
   }
   

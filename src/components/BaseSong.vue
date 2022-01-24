@@ -1,6 +1,6 @@
 <template>
   <div class="lyrics-cont">
-    <ul>
+    <ul v-if="song">
       <li>
         <h2>"{{ song.title }}"</h2>
       </li>
@@ -56,7 +56,7 @@ export default {
         this.song = data.data?.getSongLyrics;
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   },
 };
@@ -66,6 +66,7 @@ export default {
   display: grid;
   place-items: center;
   text-align: center;
+  padding: 2rem;
 }
 .pre {
   white-space: pre-line;

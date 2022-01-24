@@ -2,7 +2,7 @@
   <section id="new-song" class="container">
     <h2>{{title}} Songs</h2>
     <div v-if="$apollo.queries.songs.loading">Loading...</div>
-    <transition-group v-if="animate || songs" class="card-item" tag="div">
+    <transition-group v-if="songs.data" class="card-item" tag="div">
       <base-card
         v-for="song in songs.data"
         :key="song.id"
@@ -70,4 +70,5 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '@/assets/scss/card.scss';
+@import '@/assets/scss/cardAnimation.scss'
 </style>

@@ -5,6 +5,10 @@ $hasFooter: true;
   transform: translateY($y);
 }
 
+section{
+  padding: 2rem;
+}
+
 .card {
   display: flex;
   position: relative;
