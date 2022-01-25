@@ -2,7 +2,8 @@ import { ApolloClient, InMemoryCache } from "@apollo/client/core";
 import { createApolloProvider } from "@vue/apollo-option";
 
 const isServe = false
-const host = isServe ? 'http://192.168.0.190:8000/khemarakql' : 'http://127.0.0.1:8000/khemarakql'
+const isServer = true
+const host = isServer ? 'http://khemarak-lyrics-be.herokuapp.com/khemarakql' : isServe ? 'http://192.168.0.190:8000/khemarakql' : 'http://127.0.0.1:8000/khemarakql'
 
 // Cache implementation
 const cache = new InMemoryCache();

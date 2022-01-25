@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section id="input-section">
     <div class="input-container">
       <base-input
         :placeholder="'Enter title or name'"
@@ -21,41 +21,40 @@
         />
       </svg>
     </div>
-    <div class="results" v-if="songs[0] || artists[0]">
-      <div v-if="songs[0]">
-        <em>Songs</em>
-        <ul v-for="song in songs" :key="song.id">
-          <li>
-            <router-link
-              v-text="song.title"
-              :to="{
-                name: 'song',
-                params: {
-                  artist: this.uri(song.artist.name),
-                  title: this.uri(song.title),
-                },
-              }"
-            ></router-link>
-          </li>
-        </ul>
-      </div>
-      <div v-if="artists[0]">
-        <em>Artists</em>
-        <ul v-for="artist in artists" :key="artist.id">
-          <li>
-            <router-link
-              v-text="artist.name"
-              :to="{
-                name: 'artist',
-                params: {
-                  name: this.uri(artist.name),
-                  id: this.uri(artist.id),
-                },
-              }"
-            ></router-link>
-          </li>
-        </ul>
-      </div>
+  </section>
+  <section class="results" v-if="songs[0] || artists[0]">
+    <div v-if="songs[0]">
+      <h3 class="title"><em>Songs</em></h3>
+      <ul v-for="song in songs" :key="song.id">
+        <li>
+          <router-link
+            :to="{
+              name: 'song',
+              params: {
+                artist: this.uri(song.artist.name),
+                title: this.uri(song.title),
+              },
+            }"
+          >{{song.title + ' - ' }}<span class="sky">{{ song.artist.name }}</span></router-link>
+        </li>
+      </ul>
+    </div>
+    <div v-if="artists[0]">
+      <h3 class="title"><em>Artists</em></h3>
+      <ul v-for="artist in artists" :key="artist.id">
+        <li>
+          <router-link
+            v-text="artist.name"
+            :to="{
+              name: 'artist',
+              params: {
+                name: this.uri(artist.name),
+                id: this.uri(artist.id),
+              },
+            }"
+          ></router-link>
+        </li>
+      </ul>
     </div>
   </section>
 </template>
@@ -112,7 +111,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-section {
+section#input-section {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -127,7 +126,7 @@ input[type="text"] {
   background-color: var(--green);
   background-image: linear-gradient(315deg, var(--sky) 0%, var(--green) 74%);
   border: none;
-  color: white;
+  color: var(--white);
   font-size: 1.1rem;
   &:placeholder-shown {
     padding-left: 3rem;
@@ -152,14 +151,42 @@ svg {
 }
 
 .results {
-  width: 100%;
+  position: absolute;
+  top: 51%;
+  left: 50%;
+  transform: translate(-50%, 1.4rem);
+  width: 55%;
+  max-height: 40%;
+  overflow-y: scroll;
+  padding: 1rem;
   border-radius: 0 0 4px 4px;
   background: var(--main-bg);
-  color: #efefef;
-  padding: 1rem;
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 
-  & > div {
-    margin-top: 1rem;
+  & > div{
+    > * {
+      padding-top: .5rem;
+    }
+    > ul > li {
+      >:hover{
+        color: var(--green);
+      }
+      >a{
+        display: inline-block;
+        width: 100%;
+      }
+    }
   }
+}
+
+.title{
+  color: var(--green)
+}
+
+.sky{
+  color: var(--sky);
 }
 </style>

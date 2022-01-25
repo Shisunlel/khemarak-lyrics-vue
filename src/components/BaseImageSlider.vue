@@ -2,7 +2,10 @@
   <div class="carousel">
     <base-search />
     <div class="image-container">
-      <div class="imgs" :style="background"></div>
+      <!-- :style="background" -->
+      <div class="imgs">
+        <img :src="background" loading="lazy" alt="artist image" />
+      </div>
     </div>
   </div>
 </template>
@@ -16,13 +19,15 @@ export default {
   },
   data() {
     return {
-      background: {
-        background:
-          "url(https://2.bp.blogspot.com/-YWGO05EIaTI/UI9_JQDN1eI/AAAAAAAANIM/iN-lrVtuxqg/s0/adele-laurie-blue-adkins-1920x1080.jpg)",
-        backgroundPosition: "center",
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-      },
+      // background: {
+      //   background:
+      //     "url(https://2.bp.blogspot.com/-YWGO05EIaTI/UI9_JQDN1eI/AAAAAAAANIM/iN-lrVtuxqg/s0/adele-laurie-blue-adkins-1920x1080.jpg)",
+      //   backgroundPosition: "center",
+      //   backgroundSize: "cover",
+      //   backgroundRepeat: "no-repeat",
+      // },
+      background:
+        "https://2.bp.blogspot.com/-YWGO05EIaTI/UI9_JQDN1eI/AAAAAAAANIM/iN-lrVtuxqg/s0/adele-laurie-blue-adkins-1920x1080.jpg",
       backgroundImg: [],
       index: 0,
     };
@@ -31,8 +36,8 @@ export default {
     backgroundImg: gql`
       query {
         backgroundImg: artists {
-          data{
-              image
+          data {
+            image
           }
         }
       }
@@ -45,8 +50,8 @@ export default {
         if (this.index > this.backgroundImg.data.length - 1) {
           this.index = 0;
         }
-        this.background.background = `url(${this.backgroundImg.data[this.index].image})`;
-      }, 1000);
+        this.background = `${this.backgroundImg.data[this.index].image}`;
+      }, 1500);
     },
   },
   created() {
@@ -72,12 +77,11 @@ export default {
   & > div.imgs {
     height: inherit;
     flex: 1 0 100%;
-    transition: background 2000ms linear;
-  }
-}
 
-img {
-  width: 100%;
-  height: 30rem;
+    & > img {
+      width: 100%;
+      height: 30rem;
+    }
+  }
 }
 </style>
