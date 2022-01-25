@@ -31,8 +31,8 @@
             :to="{
               name: 'song',
               params: {
-                artist: this.uri(song.artist.name),
-                title: this.uri(song.title),
+                artist: song.artist?.parse_name,
+                title: song.parse_title,
               },
             }"
           >{{song.title + ' - ' }}<span class="sky">{{ song.artist.name }}</span></router-link>
@@ -48,8 +48,8 @@
             :to="{
               name: 'artist',
               params: {
-                name: this.uri(artist.name),
-                id: this.uri(artist.id),
+                name: artist.parse_name,
+                id: artist.id,
               },
             }"
           ></router-link>
@@ -72,11 +72,6 @@ export default {
   components: {
     BaseInput,
   },
-  methods: {
-    uri(val) {
-      return window.seoURI(val);
-    },
-  },
   watch: {
     search() {
       this.$apollo
@@ -86,14 +81,17 @@ export default {
               searchSong(title: $title) {
                 id
                 title
+                parse_title
                 artist {
                   id
                   name
+                  parse_name
                 }
               }
               searchArtist(name: $name) {
                 id
                 name
+                parse_name
               }
             }
           `,
@@ -111,82 +109,5 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-section#input-section {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 55%;
-}
-input[type="text"] {
-  padding: 0.9rem 3rem;
-  width: 100%;
-  border-radius: 4px 4px 0 0;
-  box-shadow: 0 0 1rem rgba(48, 195, 107, 0.377), 0 0 2rem rgba(36, 26, 26, 0.7);
-  background-color: var(--green);
-  background-image: linear-gradient(315deg, var(--sky) 0%, var(--green) 74%);
-  border: none;
-  color: var(--white);
-  font-size: 1.1rem;
-  &:placeholder-shown {
-    padding-left: 3rem;
-  }
-}
-
-.input-container {
-  position: relative;
-}
-
-svg {
-  position: absolute;
-  left: 0.7rem;
-  top: 0.7rem;
-}
-
-.h-6 {
-  height: 1.6rem;
-}
-.w-6 {
-  width: 1.6rem;
-}
-
-.results {
-  position: absolute;
-  top: 51%;
-  left: 50%;
-  transform: translate(-50%, 1.4rem);
-  width: 55%;
-  max-height: 40%;
-  overflow-y: scroll;
-  padding: 1rem;
-  border-radius: 0 0 4px 4px;
-  background: var(--main-bg);
-  color: var(--white);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-
-  & > div{
-    > * {
-      padding-top: .5rem;
-    }
-    > ul > li {
-      >:hover{
-        color: var(--green);
-      }
-      >a{
-        display: inline-block;
-        width: 100%;
-      }
-    }
-  }
-}
-
-.title{
-  color: var(--green)
-}
-
-.sky{
-  color: var(--sky);
-}
+@import '@/assets/scss/search.scss';
 </style>

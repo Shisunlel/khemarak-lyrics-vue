@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <router-link :to="{ name: 'artist', params: { name: artistName, id: id}}">
+    <router-link :to="{ name: 'artist', params: { name: href, id }}">
       <img :src="src" alt="" />
     </router-link>
     <div class="card-content">
@@ -16,11 +16,6 @@ export default {
     href: String,
     src: String,
     id: String
-  },
-  computed: {
-    artistName(){
-      return window.seoURI(this.href)
-    }
   }
 };
 </script>

@@ -10,7 +10,7 @@
       <hot-artist-card
         v-for="artist in getHotArtists"
         :key="artist.id"
-        :href="artist.name"
+        :href="artist.parse_name"
         :src="artist.image"
         :id="artist.id"
       >
@@ -32,6 +32,7 @@ export default {
           getHotArtists {
             id
             name
+            parse_name
             image
           }
         }

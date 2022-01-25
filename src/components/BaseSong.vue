@@ -6,7 +6,7 @@
       </li>
       <li>
         <h4>
-          <em>{{ song.artist.name }}</em>
+          <em>{{ song.artist?.name }}</em>
         </h4>
       </li>
       <li>
@@ -35,6 +35,7 @@ export default {
           query song($artist: String!, $title: String!) {
             getSongLyrics(artist: $artist, title: $title) {
               title
+              parse_title
               lyrics
               length
               album {

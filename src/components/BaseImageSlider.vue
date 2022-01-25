@@ -4,7 +4,7 @@
     <div class="image-container">
       <!-- :style="background" -->
       <div class="imgs">
-        <img :src="background" loading="lazy" alt="artist image" />
+        <img :src="background" loading="lazy" alt="artist image" v-if="backgroundImg"/>
       </div>
     </div>
   </div>
@@ -47,14 +47,14 @@ export default {
     run() {
       setInterval(() => {
         this.index++;
-        if (this.index > this.backgroundImg.data.length - 1) {
+        if (this.index > this.backgroundImg?.data?.length - 1) {
           this.index = 0;
         }
-        this.background = `${this.backgroundImg.data[this.index].image}`;
+        this.background = `${this.backgroundImg.data[this.index]?.image}`;
       }, 1500);
     },
   },
-  created() {
+  mounted() {
     this.run();
   },
 };

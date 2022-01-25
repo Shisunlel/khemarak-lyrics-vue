@@ -5,9 +5,9 @@
       <base-card
         v-for="song in songs.data"
         :key="song.id"
-        :href="song.artist.name"
+        :href="song.artist?.parse_name"
         :src="song.album?.cover ?? song.artist.image"
-        :title="song.title"
+        :title="song.parse_title"
       >
         <template #card-title>
           <h4>{{ song.title }}</h4>
@@ -54,9 +54,11 @@ export default {
               data {
                 id
                 title
+                parse_title
                 lyrics
                 artist{
                     name
+                    parse_name
                     image
                 }
                 album{

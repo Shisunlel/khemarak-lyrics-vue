@@ -7,17 +7,17 @@ export default {
         query: gql`
           query {
             getRandomSong {
-              title
+              parse_title
               artist {
-                name
+                parse_name
               }
             }
           }
         `,
       })
       .then((data) => {
-        let artist = window.seoURI(data.data?.getRandomSong?.artist?.name);
-        let title = window.seoURI(data.data?.getRandomSong?.title);
+        let artist = data.data?.getRandomSong?.artist?.parse_name;
+        let title = data.data?.getRandomSong?.parse_title;
         this.$router.push({
           name: "song",
           params: { artist, title },
