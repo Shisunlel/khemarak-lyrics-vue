@@ -55,7 +55,9 @@ export default {
     },
   },
   mounted() {
-    this.run();
+    if(this.backgroundImg){
+      this.run();
+    }
   },
 };
 </script>

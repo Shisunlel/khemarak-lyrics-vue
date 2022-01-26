@@ -16,7 +16,7 @@ const cache = new InMemoryCache();
 const apolloClient = new ApolloClient({
   cache,
   uri: host,
-  // credentials: "same-origin",
+  credentials: "same-origin",
 });
 
 const apolloProvider = createApolloProvider({
