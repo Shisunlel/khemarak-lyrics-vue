@@ -9,7 +9,7 @@
       />
     </div>
     <div>
-      <label for="title">Title:</label>
+      <label for="title">Title: (`-` hyphen will be replaced)</label>
       <base-input
         :placeholder="'Enter song title'"
         :name="'title'"

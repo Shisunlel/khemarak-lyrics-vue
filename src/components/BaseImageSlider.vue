@@ -50,7 +50,7 @@ export default {
         if (this.index > this.backgroundImg?.data?.length - 1) {
           this.index = 0;
         }
-        this.background = `${this.backgroundImg.data[this.index]?.image}`;
+        this.background = `${this.backgroundImg?.data[this.index]?.image}`;
       }, 1500);
     },
   },

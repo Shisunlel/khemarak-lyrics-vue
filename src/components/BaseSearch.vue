@@ -4,6 +4,9 @@
       <base-input
         :placeholder="'Enter title or name'"
         :name="'search'"
+        autocomplete="off"
+        @blur="hideResults"
+        @focus="showResults"
         v-model="search"
       ></base-input>
       <svg
@@ -22,7 +25,7 @@
       </svg>
     </div>
   </section>
-  <section class="results" v-if="songs[0] || artists[0]">
+  <section class="results" v-if="(songs[0] || artists[0]) && show">
     <div v-if="songs[0]">
       <h3 class="title"><em>Songs</em></h3>
       <ul v-for="song in songs" :key="song.id">
@@ -67,10 +70,21 @@ export default {
       search: "",
       songs: [],
       artists: [],
+      show: false
     };
   },
   components: {
     BaseInput,
+  },
+  methods: {
+    hideResults(){
+      this.show = false
+    },
+    showResults(){
+      if(this.songs || this.artists){
+        this.show = true
+      }
+    }
   },
   watch: {
     search() {
@@ -103,6 +117,9 @@ export default {
         .then((data) => {
           this.songs = data.data?.searchSong;
           this.artists = data.data?.searchArtist;
+          if(this.songs || this.artists){
+            this.show = true
+          }
         });
     },
   },
