@@ -1,3 +1,5 @@
+@use "./variable.scss" as v;
+
 $hasBody: true;
 $hasFooter: true;
 
@@ -5,7 +7,7 @@ $hasFooter: true;
   transform: translateY($y);
 }
 
-section{
+section {
   padding: 2rem;
 }
 
@@ -68,14 +70,14 @@ section{
   }
 }
 
-@if $hasBody{
+@if $hasBody {
   .card-body {
     margin-bottom: 1rem;
     color: var(--green);
   }
 }
 
-@if $hasFooter{
+@if $hasFooter {
   .card-footer p {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -100,14 +102,14 @@ section{
     }
   }
 
-  @if $hasFooter{
+  @if $hasFooter {
     .card:hover .card-footer {
       display: block;
     }
   }
 }
 
-@media only screen and (min-width: 992px) {
+@include v.screen(v.$desktop) {
   .card {
     & > .card-content {
       @include translateY(20%);
@@ -122,10 +124,10 @@ section{
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
 
-  @if $hasFooter{
+  @if $hasFooter {
     .card-footer {
       display: none;
-  
+
       & > p {
         max-height: none;
         -webkit-line-clamp: 6;

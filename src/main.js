@@ -5,14 +5,16 @@ import apolloProvider from "../apollo.provider";
 
 import TheSidebar from "./layouts/TheSidebar";
 
-function seoURI(val){
-    return val.toLowerCase().replaceAll(/ /g, '-')
-  }
+function seoURI(val) {
+  return val.toLowerCase().replaceAll(/ /g, "-");
+}
 
-window.seoURI = seoURI
+window.seoURI = seoURI;
 
 const app = createApp(App);
 app.component("sidebar", TheSidebar);
 app.use(router);
 app.use(apolloProvider);
-app.mount("#app");
+router.isReady().then(() => {
+  app.mount("#app");
+});

@@ -1,4 +1,6 @@
-section{
+@use "./variable.scss" as v;
+
+section {
   padding: 2rem;
 }
 
@@ -37,7 +39,7 @@ section{
   }
 }
 
-@media only screen and (min-width: 992px) {
+@include v.screen(v.$desktop) {
   .container {
     place-items: stretch;
   }

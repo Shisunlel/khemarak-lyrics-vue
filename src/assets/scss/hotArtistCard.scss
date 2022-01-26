@@ -1,14 +1,12 @@
-@use './card.scss';
+@use "./variable.scss" as v;
+@use "./card.scss";
 
 $hasBody: false;
 $hasFooter: false;
 
 @media (hover: hover) {
   .card:hover {
-    
     & > .card-content {
-      
-
       & > .card-title {
         position: absolute;
         top: 50%;
@@ -19,7 +17,7 @@ $hasFooter: false;
   }
 }
 
-@media only screen and (min-width: 992px) {
+@include v.screen(v.$desktop) {
   .card {
     & > .card-content {
       @include card.translateY(10%);

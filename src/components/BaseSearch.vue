@@ -38,7 +38,9 @@
                 title: song.parse_title,
               },
             }"
-          >{{song.title + ' - ' }}<span class="sky">{{ song.artist.name }}</span></router-link>
+            >{{ song.title + " - "
+            }}<span class="sky">{{ song.artist.name }}</span></router-link
+          >
         </li>
       </ul>
     </div>
@@ -70,21 +72,23 @@ export default {
       search: "",
       songs: [],
       artists: [],
-      show: false
+      show: false,
     };
   },
   components: {
     BaseInput,
   },
   methods: {
-    hideResults(){
-      this.show = false
+    hideResults() {
+      setTimeout(() => {
+        this.show = false;
+      }, 1000);
     },
-    showResults(){
-      if(this.songs || this.artists){
-        this.show = true
+    showResults() {
+      if (this.songs || this.artists) {
+        this.show = true;
       }
-    }
+    },
   },
   watch: {
     search() {
@@ -117,8 +121,8 @@ export default {
         .then((data) => {
           this.songs = data.data?.searchSong;
           this.artists = data.data?.searchArtist;
-          if(this.songs || this.artists){
-            this.show = true
+          if (this.songs || this.artists) {
+            this.show = true;
           }
         });
     },
@@ -126,5 +130,5 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import '@/assets/scss/search.scss';
+@import "@/assets/scss/search.scss";
 </style>

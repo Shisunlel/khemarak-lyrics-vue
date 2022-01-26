@@ -15,23 +15,35 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: Home,
+      meta: {
+        title: 'Khemarak Lyrics',
+      }
     },
     {
       path: "/request",
       name: "request",
       component: NewRequest,
+      meta: {
+        title: 'Khemarak Lyrics - New Request'
+      }
     },
     {
       path: "/songs",
       name: "songs",
       component: NewSong,
       props: true,
+      meta: {
+        title: 'Khemarak Lyrics - All Songs'
+      }
     },
     {
       path: "/artists",
       name: "artists",
       component: AllArtists,
       props: true,
+      meta: {
+        title: 'Khemarak Lyrics - All Artist'
+      }
     },
     {
       path: "/shuffle",
@@ -42,12 +54,18 @@ const router = createRouter({
       name: "song",
       component: BaseSong,
       props: true,
+      meta: {
+        title: route => `Khemarak Lyrics - ${route.params.title.toUpperCase()}`
+      }
     },
     {
       path: "/artist/:name/:id",
       name: "artist",
       component: BaseArtist,
       props: true,
+      meta: {
+        title: route => `Khemarak Lyrics - ${route.params.name.toUpperCase()}`
+      }      
     },
     {
       path: "/:any(.*)",
@@ -58,5 +76,11 @@ const router = createRouter({
     return { x: 0, y: 0 };
   },
 });
+
+// router.beforeEach((to, from, next) => {
+//   const { title } = to.meta;
+//   document.title = typeof title == 'function' ? title(to) : title
+//   next()
+// })
 
 export default router;

@@ -59,7 +59,8 @@
         </svg>
       </router-link>
       <ul class="nav-list">
-        <li class="nav-item">
+        <hr width="200px"/>
+        <li class="nav-item" :class="{ active : this.currentRoute('songs') || this.currentRoute('song')}">
           <router-link :to="{ name: 'songs' }">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -77,8 +78,8 @@
             </svg>
           </router-link>
         </li>
-        <hr width="200px" color="#383838" />
-        <li class="nav-item active">
+        <hr width="200px"/>
+        <li class="nav-item" :class="{ active : this.currentRoute('home')}">
           <a href="/shuffle">
             <svg
               stroke-width="1.5"
@@ -113,8 +114,8 @@
             </svg>
           </a>
         </li>
-        <hr width="200px" color="#383838" />
-        <li class="nav-item">
+        <hr width="200px"/>
+        <li class="nav-item" :class="{ active : this.currentRoute('artists') || this.currentRoute('artist')}">
           <router-link :to="{ name: 'artists' }">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -132,16 +133,26 @@
             </svg>
           </router-link>
         </li>
+        <hr width="200px"/>
       </ul>
       <ul class="nav-footer">
         <li>
           <router-link :to="{ name: 'request' }">Submit A Lyric</router-link>
         </li>
-        <li>&copy; 2022 Khemarak Lyrics</li>
+        <li>&copy; 2022 <a style="color: var(--green)" href="https://github.com/shisunlel" target="_blank">Khemarak Lyrics</a></li>
       </ul>
     </div>
   </nav>
 </template>
+<script>
+export default {
+  methods: {
+    currentRoute(name){
+      return this.$route.name == name
+    }
+  },
+}
+</script>
 <style lang="scss" scoped>
 @import "@/assets/scss/sidebar.scss";
 </style>

@@ -1,3 +1,4 @@
+@use "./variable.scss" as v;
 @import url("https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&display=swap");
 
 :root {
@@ -45,7 +46,12 @@ a {
   display: flex;
   color: #e4e4e4;
   font-family: "Jost", sans-serif;
+  font-size: 12.8px;
   min-height: 100vh;
+
+  @include v.screen(v.$tablet) {
+    font-size: 16px;
+  }
 }
 
 main {
@@ -54,10 +60,8 @@ main {
   width: 100%;
   margin-left: 0;
   position: relative;
-}
 
-@media only screen and (min-width: 992px) {
-  main {
+  @include v.screen(v.$desktop) {
     margin-left: 200px;
   }
 }

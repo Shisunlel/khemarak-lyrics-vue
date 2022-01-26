@@ -67,7 +67,7 @@ export default {
   display: grid;
   place-items: center;
   text-align: center;
-  padding: 2rem;
+  padding: 1rem;
 }
 .pre {
   white-space: pre-line;
@@ -77,5 +77,11 @@ h2{
 }
 li{
   margin-bottom: 2rem;
+}
+
+@media screen and (min-width: 768px) {
+  .lyrics-cont{
+    padding: 2rem;
+  }
 }
 </style>
