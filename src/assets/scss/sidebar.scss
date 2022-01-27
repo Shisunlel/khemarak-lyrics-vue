@@ -5,7 +5,7 @@
   width: 100%;
   position: relative;
   min-height: auto;
-  background: var(--main-bg);
+  background: var(--background);
   box-shadow: 3px 0px 5px 0px #2424244d;
 
   @include v.screen(v.$tablet) {
@@ -111,6 +111,10 @@
 
 hr {
   color: rgba($color: #383838, $alpha: 0.4);
+
+  @media (prefers-color-scheme: light) {
+    color: rgba($color: #FAFAFA, $alpha: 0.4);
+  }
 }
 
 @media (hover: hover) {

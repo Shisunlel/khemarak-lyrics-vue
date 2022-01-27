@@ -4,10 +4,8 @@
 :root {
   --green: #30c36b;
   --sky: #0ea5e9;
-  --whtie: #efefef;
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity));
-  --main-bg: linear-gradient(180deg, #151515 0%, #292929 100%);
   --tw-ring-inset: var(--tw-empty);
   --tw-ring-offset-width: 0px;
   --tw-ring-offset-color: #fff;
@@ -16,6 +14,23 @@
   --tw-ring-shadow: 0 0 #0000;
   --tw-shadow: 0 0 #0000;
   --tw-shadow-colored: 0 0 #0000;
+
+  --background-fallback: #151515;
+  --background: linear-gradient(0deg, #151515 0%, #292929 100%);
+  --color: #e4e4e4;
+  --alt-color: #2b2b2b;
+  --shadow: 0 5px 10px rgba(64, 99, 255, 0.05), 0 15px 50px rgba(65, 100, 255, 0.2);
+  
+  @media (prefers-color-scheme: light){
+    --background-fallback: #FAFAFA;
+    --background: linear-gradient(0deg, #FAFAFA 0%, #E9E9E9 100%);
+    --color: #2b2b2b;
+    --alt-color: #e4e4e4;
+    --green: #1F7E45;
+    --sky: #096895;
+    // --shadow: rgba(68, 68, 68, 0.5);
+    // box-shadow: 0 5px 10px rgba(154,160,185,.05), 0 15px 40px rgba(166,173,201,.2);
+  }
 }
 * {
   margin: 0;
@@ -45,7 +60,7 @@ a {
 
 #app {
   display: grid;
-  color: #e4e4e4;
+  color: var(--color);
   font-family: "Jost", sans-serif;
   font-size: 12.8px;
   min-height: 100vh;
@@ -56,7 +71,8 @@ a {
 }
 
 main {
-  background: linear-gradient(0deg, #151515 0%, #292929 100%);
+  background: var(--background-fallback);
+  background: var(--background);
   // padding: 2rem;
   // width: 100%;
   margin-left: 0;

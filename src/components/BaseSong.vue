@@ -71,6 +71,7 @@ export default {
 }
 .pre {
   white-space: pre-line;
+  line-height: 2.5;
 }
 h2{
   color: var(--green);
