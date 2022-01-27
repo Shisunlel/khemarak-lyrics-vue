@@ -61,7 +61,8 @@ section {
 
 .card-item {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  // grid-template-columns: 1fr;
   /* padding: 2rem 0; */
   margin: 1rem 0 0 0;
 
@@ -109,6 +110,7 @@ section {
   }
 }
 
+
 @include v.screen(v.$desktop) {
   .card {
     & > .card-content {
@@ -120,9 +122,9 @@ section {
     place-items: stretch;
   }
 
-  .card-item {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  }
+  // .card-item {
+  //   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  // }
 
   @if $hasFooter {
     .card-footer {

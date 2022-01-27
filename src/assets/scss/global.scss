@@ -43,7 +43,7 @@ a {
 }
 
 #app {
-  display: flex;
+  display: grid;
   color: #e4e4e4;
   font-family: "Jost", sans-serif;
   font-size: 12.8px;
@@ -57,11 +57,19 @@ a {
 main {
   background: linear-gradient(0deg, #151515 0%, #292929 100%);
   // padding: 2rem;
-  width: 100%;
+  // width: 100%;
   margin-left: 0;
   position: relative;
 
-  @include v.screen(v.$desktop) {
+  @include v.screen(v.$tablet) {
     margin-left: 200px;
   }
+}
+
+.w-6{
+  width: 2.5rem;
+}
+
+.h-6{
+  height: 2.5rem;
 }

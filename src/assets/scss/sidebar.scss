@@ -1,78 +1,132 @@
-@use './_variable.scss' as v;
+@use "./_variable.scss" as v;
 
 .nav {
-    display: none;
+  display: block;
+  width: 100%;
+  position: relative;
+  min-height: auto;
+  background: var(--main-bg);
+  box-shadow: 3px 0px 5px 0px #2424244d;
+
+  @include v.screen(v.$tablet) {
     width: 200px;
     position: fixed;
     min-height: 100vh;
-    background: var(--main-bg);
-    box-shadow: 3px 0px 5px 0px #2424244d;
-
-    @include v.screen(v.$desktop){
-      display: block;
-    }
   }
-  
-  .nav-container {
-    display: flex;
-    min-height: inherit;
+}
+
+.nav-container {
+  display: flex;
+  min-height: inherit;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1rem;
+  place-items: center;
+
+  @include v.screen(v.$tablet){
     flex-direction: column;
     justify-content: space-around;
-    place-items: center;
+
   }
-  
-  .nav-brand {
-    width: 50px;
-    height: 50px;
+}
+
+.nav-brand {
+  width: 50px;
+  height: 50px;
+
+  & > svg {
+    width: 40px;
+    height: 40px;
+
+    @include v.screen(v.$tablet) {
+      width: 49px;
+      height: 74px;
+    }
   }
-  
-  .nav-list {
-    display: flex;
-    flex-direction: column;
-    place-items: center;
+}
+
+.hidden {
+  display: none;
+
+  @include v.screen(v.$tablet) {
+    display: block;
   }
-  
-  .nav-item {
-    width: 100%;
+
+  &-sm {
+    display: block;
+
+    @include v.screen(v.$tablet) {
+      display: none;
+    }
+  }
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+}
+
+.nav-item {
+  width: 100%;
+  padding: .5rem 1rem;
+  position: relative;
+  text-align: left;
+
+  @include v.screen(v.$tablet){
     padding: 1rem 0;
-    position: relative;
     text-align: center;
-    
-    & > a{
-        width: 3rem;
-        display: inline-block;
-        transition: transform 0.5s cubic-bezier(0.39, 0.575, 0.565, 1);
-    }
-  }
-  
-  .nav-item.active::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    background: linear-gradient(180deg, var(--green) 100%, #33b687 0%);
-    width: 2px;
-    height: 100%;
-  }
-  
-  .nav-item.active a svg {
-    color: var(--green);
-  }
-  
-  .nav-footer{
-    text-align: center;
-
-    & > li{
-        margin-top: 1rem;
-    }
   }
 
-  hr{
-    color: rgba($color: #383838, $alpha: 0.4)
-  }
-  
-  @media (hover: hover) {
-    .nav-item a:hover {
-      transform: scale(0.8);
+  & > a {
+    @include v.screen(v.$tablet){
+      width: 3rem;
+      display: inline-block;
+      transition: transform 0.5s cubic-bezier(0.39, 0.575, 0.565, 1);
     }
   }
+}
+
+.nav-item.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: linear-gradient(180deg, var(--green) 100%, #33b687 0%);
+  width: 2px;
+  height: 100%;
+}
+
+.nav-item.active a svg {
+  color: var(--green);
+}
+
+.nav-footer {
+  text-align: center;
+
+  & > li {
+    margin-top: 1rem;
+  }
+}
+
+hr {
+  color: rgba($color: #383838, $alpha: 0.4);
+}
+
+@media (hover: hover) {
+  .nav-item a:hover {
+    transform: scale(0.8);
+  }
+}
+
+.fade-enter-from, .fade-leave-to{
+  opacity: 0;
+}
+
+.fade-enter-active, .fade-leave-active{
+  transition: opacity 0.2s ease;
+}
+
+.fade-enter-to, .fade-leave-from{
+  opacity: 1;
+}
