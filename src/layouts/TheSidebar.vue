@@ -211,12 +211,7 @@
         </transition>
       </div>
     </div>
-    <div
-      :class="[open ? 'hidden-sm' : 'hidden']"
-      class="pb-1"
-      @focusout="openDropdown"
-      tabindex="0"
-    >
+    <div :class="[open ? 'hidden-sm' : 'hidden']" class="pb-1">
       <ul class="nav-list">
         <li
           class="nav-item"
