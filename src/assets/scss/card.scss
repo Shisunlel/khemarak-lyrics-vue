@@ -81,6 +81,7 @@ section {
 @if $hasFooter {
   .card-footer p {
     overflow: hidden;
+    font-size: .9em;
     text-overflow: ellipsis;
     display: -webkit-box;
     /* fallback */

@@ -174,7 +174,7 @@
         </ul>
       </div>
 
-      <div class="hidden-sm">
+      <div class="hidden-sm" @focusout="openDropdown" tabindex="0">
         <transition name="fade" mode="out-in">
         <svg
           @click="openDropdown"
@@ -211,7 +211,7 @@
         </transition>
       </div>
     </div>
-    <div :class="[open ? 'hidden-sm' : 'hidden']">
+    <div :class="[open ? 'hidden-sm' : 'hidden']" class="pb-1">
       <ul class="nav-list">
         <li
           class="nav-item"
