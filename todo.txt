@@ -1,0 +1,6 @@
+Song Lyrics Page
+- add contributor name
+- related songs from artist
+- artist description
+- songs from same album if exist
+- youtube url (low chance)

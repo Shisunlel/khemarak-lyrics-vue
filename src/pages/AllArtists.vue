@@ -23,7 +23,7 @@
 </template>
 <script>
 import gql from "graphql-tag";
-import HotArtistCard from "./HotArtistCard.vue";
+import HotArtistCard from "../components/HotArtistCard.vue";
 export default {
   apollo: {
     artists: {
