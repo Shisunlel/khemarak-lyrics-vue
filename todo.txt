@@ -3,4 +3,5 @@ Song Lyrics Page
 - related songs from artist
 - artist description
 - songs from same album if exist
+- load more or paginate
 - youtube url (low chance)

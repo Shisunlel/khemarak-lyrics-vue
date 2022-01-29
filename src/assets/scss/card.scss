@@ -37,7 +37,10 @@ section {
   & > .card-content {
     position: absolute;
     width: 100%;
-    background: var(--background);
+    background: rgba(15, 15, 15, 0.63);
+    @media (prefers-color-scheme: light){
+      background: rgba(228, 228, 228, 0.63)
+    }
     /* color: var(--green); */
     bottom: 0;
     padding: 1rem;
