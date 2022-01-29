@@ -77,10 +77,10 @@ const router = createRouter({
   },
 });
 
-// router.beforeEach((to, from, next) => {
-//   const { title } = to.meta;
-//   document.title = typeof title == 'function' ? title(to) : title
-//   next()
-// })
+router.beforeEach((to, from, next) => {
+  const { title } = to.meta;
+  document.title = typeof title == 'function' ? title(to) : title
+  next()
+})
 
 export default router;
