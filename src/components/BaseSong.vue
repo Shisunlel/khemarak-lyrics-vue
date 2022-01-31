@@ -21,44 +21,22 @@
 import gql from "graphql-tag";
 export default {
   props: ["artist", "title"],
-  data() {
-    return {
-      song: {},
-      artist_name: this.artist,
-      song_title: this.title,
-    };
+  computed: {
+    song() {
+      return this.$store.getters["songModule/song"];
+    },
   },
-  created() {
-    this.$apollo
-      .query({
-        query: gql`
-          query song($artist: String!, $title: String!) {
-            getSongLyrics(artist: $artist, title: $title) {
-              title
-              parse_title
-              lyrics
-              length
-              album {
-                name
-                cover
-              }
-              artist {
-                name
-              }
-            }
-          }
-        `,
-        variables: {
-          artist: this.artist_name,
-          title: this.song_title,
-        },
-      })
-      .then((data) => {
-        this.song = data.data?.getSongLyrics;
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+  async created() {
+    return await this.getSong();
+  },
+  methods: {
+    async getSong() {
+      const data = {
+        artist: this.artist,
+        title: this.title,
+      };
+      return await this.$store.dispatch("songModule/song", data);
+    },
   },
 };
 </script>
@@ -73,15 +51,15 @@ export default {
   white-space: pre-line;
   line-height: 2.5;
 }
-h2{
+h2 {
   color: var(--green);
 }
-li{
+li {
   margin-bottom: 2rem;
 }
 
 @media screen and (min-width: 768px) {
-  .lyrics-cont{
+  .lyrics-cont {
     padding: 2rem;
   }
 }

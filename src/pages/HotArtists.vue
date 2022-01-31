@@ -1,14 +1,13 @@
 <template>
   <section id="hot-artist" class="container">
     <h2>Hot Artists</h2>
-    <div v-if="$apollo.queries.getHotArtists.loading">Loading...</div>
     <transition-group
-      v-if="!$apollo.queries.getHotArtists.loading || animate"
+      v-if="hotArtists || animate"
       class="card-item"
       tag="div"
     >
       <hot-artist-card
-        v-for="artist in getHotArtists"
+        v-for="artist in hotArtists"
         :key="artist.id"
         :href="artist.parse_name"
         :src="artist.image"
@@ -19,35 +18,30 @@
         </template>
       </hot-artist-card>
     </transition-group>
+    <div v-else>Loading...</div>
   </section>
 </template>
 <script>
-import gql from "graphql-tag";
+import { mapGetters } from 'vuex';
 import HotArtistCard from "../components/HotArtistCard.vue";
 export default {
-  apollo: {
-    getHotArtists: {
-      query: gql`
-        query {
-          getHotArtists {
-            id
-            name
-            parse_name
-            image
-          }
-        }
-      `,
-    },
-  },
   components: {
     HotArtistCard,
   },
   props: ["animate"],
-  data() {
-    return {
-      getHotArtists: [],
-    };
+  computed: {
+    ...mapGetters({
+      hotArtists: 'getHotArtists'
+    })
   },
+  methods: {
+    async getHotArtists(){
+      return await this.$store.dispatch('loadHotArtists')
+    }
+  },
+  async created(){
+    await this.getHotArtists()
+  }
 };
 </script>
 <style lang="scss" scoped>

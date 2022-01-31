@@ -1,7 +1,6 @@
 <template>
   <section id="new-song" class="container">
     <h2>{{title}} Songs</h2>
-    <div v-if="$apollo.queries.songs.loading">Loading...</div>
     <transition-group v-if="songs.data" class="card-item" tag="div">
       <base-card
         v-for="song in songs.data"
@@ -21,52 +20,29 @@
         </template>
       </base-card>
     </transition-group>
+    <div v-else>Loading...</div>
   </section>
 </template>
 <script>
-import gql from "graphql-tag";
 import BaseCard from "../components/BaseCard.vue";
 export default {
-  apollo: {
-    songs: {
-      query: gql`
-        query {
-          songs(first: 8, orderBy: [{column: CREATED_AT, order: DESC}]) {
-            data {
-              id
-              title
-              parse_title
-              artist {
-                name
-                parse_name
-                image
-              }
-              album {
-                name
-                cover
-              }
-              length
-              track
-              disc
-              lyrics
-            }
-          }
-        }
-      `,
-    },
-  },
   components: {
     BaseCard,
   },
   props: ["animate"],
   data() {
     return {
-      songs: [],
-      title: ''
+      title: '',
     };
+  },
+  computed: {
+    songs(){
+      return this.$store.getters['getSongs']
+    }
   },
   created(){
     this.title = this.$route.name == 'songs' ? 'All': 'New'
+    this.$store.dispatch('loadSongs')
   }
 };
 </script>

@@ -1,9 +1,8 @@
 <template>
   <section id="all-artist" class="container">
     <h2>All Artists</h2>
-    <div v-if="$apollo.queries.artists.loading">Loading...</div>
     <transition-group
-      v-if="artists"
+      v-if="artists.data"
       class="card-item"
       tag="div"
     >
@@ -19,37 +18,29 @@
         </template>
       </hot-artist-card>
     </transition-group>
+    <div v-else>Loading...</div>
   </section>
 </template>
 <script>
-import gql from "graphql-tag";
 import HotArtistCard from "../components/HotArtistCard.vue";
 export default {
-  apollo: {
-    artists: {
-      query: gql`
-        query {
-          artists(first: 8) {
-            data {
-              id
-              name
-              parse_name
-              image
-            }
-          }
-        }
-      `,
-    },
-  },
   components: {
     HotArtistCard,
   },
   props: ["animate"],
-  data() {
-    return {
-      artists: [],
-    };
+  computed: {
+    artists(){
+      return this.$store.getters['getAllArtist']
+    }
   },
+  async created(){
+    await this.fetchData()
+  },
+  methods: {
+    async fetchData(){
+      await this.$store.dispatch('loadAllArtists')
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

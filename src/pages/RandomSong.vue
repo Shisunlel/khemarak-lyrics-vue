@@ -1,36 +1,28 @@
 <template>
-  <div>
-    
-  </div>
+  <div></div>
 </template>
 <script>
-import gql from "graphql-tag";
+import { mapGetters } from "vuex";
 export default {
-  created() {
-    this.$apollo
-      .query({
-        query: gql`
-          query {
-            getRandomSong {
-              parse_title
-              artist {
-                parse_name
-              }
-            }
-          }
-        `,
-      })
-      .then((data) => {
-        let artist = data.data?.getRandomSong?.artist?.parse_name;
-        let title = data.data?.getRandomSong?.parse_title;
-        this.$router.push({
-          name: "song",
-          params: { artist, title },
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  computed: {
+    ...mapGetters("randomModule", {
+      data: "getRandomData",
+    }),
+  },
+  async created() {
+    await this.fetchRandom();
+    this.$router.push({
+      name: "song",
+      params: {
+        artist: this.data.artist,
+        title: this.data.title,
+      },
+    });
+  },
+  methods: {
+    async fetchRandom() {
+      return await this.$store.dispatch("randomModule/fetchRandomSong");
+    },
   },
 };
 </script>
