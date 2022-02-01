@@ -17,7 +17,7 @@ export default {
   },
   mutations: {
     artist(state, payload) {
-      return (state.artist = payload);
+      state.artist = payload;
     },
   },
   actions: {
@@ -52,7 +52,7 @@ export default {
           artist_id: payload.artist_id,
         },
       });
-      return context.commit('artist', data.data?.artistSong)
+      context.commit("artist", data.data?.artistSong);
     },
   },
 };

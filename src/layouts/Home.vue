@@ -1,7 +1,9 @@
 <template>
-  <base-image-slider />
-  <new-songs :animate="1" />
-  <hot-artists :animate="1" />
+  <div>
+    <base-image-slider />
+    <new-songs :animate="1" />
+    <hot-artists :animate="1" />
+  </div>
 </template>
 
 <script>

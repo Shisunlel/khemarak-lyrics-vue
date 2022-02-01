@@ -1,11 +1,7 @@
 <template>
   <section id="hot-artist" class="container">
     <h2>Hot Artists</h2>
-    <transition-group
-      v-if="hotArtists || animate"
-      class="card-item"
-      tag="div"
-    >
+    <transition-group v-if="hotArtists && animate" class="card-item" tag="div">
       <hot-artist-card
         v-for="artist in hotArtists"
         :key="artist.id"
@@ -22,7 +18,7 @@
   </section>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 import HotArtistCard from "../components/HotArtistCard.vue";
 export default {
   components: {
@@ -31,19 +27,19 @@ export default {
   props: ["animate"],
   computed: {
     ...mapGetters({
-      hotArtists: 'getHotArtists'
-    })
+      hotArtists: "getHotArtists",
+    }),
   },
   methods: {
-    async getHotArtists(){
-      return await this.$store.dispatch('loadHotArtists')
-    }
+    async getHotArtists() {
+      return await this.$store.dispatch("loadHotArtists");
+    },
   },
-  async created(){
-    await this.getHotArtists()
-  }
+  async created() {
+    await this.getHotArtists();
+  },
 };
 </script>
 <style lang="scss" scoped>
-@import '@/assets/scss/cardAnimation.scss';
+@import "@/assets/scss/cardAnimation.scss";
 </style>

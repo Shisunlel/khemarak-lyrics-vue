@@ -2,7 +2,7 @@
   <sidebar />
   <main>
     <router-view v-slot="component">
-      <transition>
+      <transition mode="out-in" name="route">
         <component :is='component.Component'></component>
       </transition>
     </router-view>

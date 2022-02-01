@@ -17,7 +17,7 @@ export default {
   },
   mutations: {
     song(state, payload) {
-      return (state.song = payload);
+      state.song = payload;
     },
   },
   actions: {
@@ -45,7 +45,7 @@ export default {
           title: payload.title,
         },
       });
-      return context.commit('song', data.data?.getSongLyrics)
+      context.commit("song", data.data?.getSongLyrics);
     },
   },
 };

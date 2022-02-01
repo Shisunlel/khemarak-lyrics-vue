@@ -20,10 +20,10 @@ export default {
   },
   mutations: {
     getRandomSong(state, payload) {
-      return (state.random = {
+      state.random = {
         artist: payload.artist.parse_name,
         title: payload.parse_title,
-      });
+      };
     },
   },
   actions: {
@@ -41,7 +41,7 @@ export default {
         `,
       });
       if (data.data?.getRandomSong) {
-        return context.commit("getRandomSong", data.data?.getRandomSong);
+        context.commit("getRandomSong", data.data?.getRandomSong);
       }
     },
   },
