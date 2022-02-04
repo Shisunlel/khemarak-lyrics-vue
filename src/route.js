@@ -1,12 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import Home from "./layouts/Home";
-import NewRequest from "./pages/NewRequest";
+const NewRequest = () => import("./pages/NewRequest")
 import NewSong from "./pages/NewSong";
 import BaseSong from "./components/BaseSong";
 import BaseArtist from "./components/BaseArtist";
 import AllArtists from "./pages/AllArtists";
-import RandomSong from "./pages/RandomSong";
+const RandomSong = () => import("./pages/RandomSong")
 
 const router = createRouter({
   history: createWebHistory(),
@@ -77,7 +77,7 @@ const router = createRouter({
   },
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _, next) => {
   const { title } = to.meta;
   document.title = typeof title == 'function' ? title(to) : title
   next()
