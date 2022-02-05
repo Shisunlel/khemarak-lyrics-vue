@@ -1,68 +1,78 @@
 <template>
-  <form>
-    <div>
-      <label for="user"> What is your name?: </label>
-      <base-input
-        :placeholder="'Your name will be contributed when accepted'"
-        :name="'user'"
-        v-model="user"
-      />
-    </div>
-    <div>
-      <label for="title">Title: (`-` hyphen will be replaced)</label>
-      <base-input
-        :placeholder="'Enter song title'"
-        :name="'title'"
-        v-model="title"
-        required
-      />
-    </div>
-    <div>
-      <label for="artist">Artist:</label>
-      <base-input
-        :placeholder="'Enter artist name'"
-        :name="'artist'"
-        v-model="artist"
-        required
-      />
-    </div>
-    <div>
-      <label for="album">Album:</label>
-      <base-input
-        :placeholder="'Enter album name'"
-        :name="'album'"
-        v-model="album"
-      />
-    </div>
-    <div>
-      <label for="source">Where did you get these lyrics?:</label>
-      <select name="sorce" v-model="selectedSource">
-        <option v-for="source in sources" :key="source" :value="source">
-          {{ source }}
-        </option>
-      </select>
-    </div>
-    <div>
-      <label for="lyrics">Lyrics:</label>
-      <textarea
-        name="lyrics"
-        cols="30"
-        rows="10"
-        v-model="lyrics"
-        required
-      ></textarea>
-    </div>
-    <div class="button">
-      <button type="button" @click="formSubmit">Submit Lyrics</button>
-    </div>
-  </form>
-  <base-dialog :show="isSuccess"/>
+  <div>
+    <form>
+      <div>
+        <label for="user"> What is your name?: </label>
+        <base-input
+          :placeholder="'Your name will be contributed when accepted'"
+          :name="'user'"
+          v-model="user"
+        />
+      </div>
+      <div>
+        <label for="title">Title: (`-` hyphen will be replaced)</label>
+        <base-input
+          :placeholder="'Enter song title'"
+          :name="'title'"
+          v-model="title"
+          required
+        />
+      </div>
+      <div>
+        <label for="artist">Artist:</label>
+        <base-input
+          :placeholder="'Enter artist name'"
+          :name="'artist'"
+          v-model="artist"
+          required
+        />
+      </div>
+      <div>
+        <label for="album">Album:</label>
+        <base-input
+          :placeholder="'Enter album name'"
+          :name="'album'"
+          v-model="album"
+        />
+      </div>
+      <div>
+        <label for="source">Where did you get these lyrics?:</label>
+        <select name="sorce" v-model="selectedSource">
+          <option v-for="source in sources" :key="source" :value="source">
+            {{ source }}
+          </option>
+        </select>
+      </div>
+      <div>
+        <label for="lyrics">Lyrics:</label>
+        <textarea
+          name="lyrics"
+          cols="30"
+          rows="10"
+          v-model="lyrics"
+          required
+        ></textarea>
+      </div>
+      <div class="button">
+        <button
+          class="btn btn-layered-3d btn-layered-3d--green"
+          type="button"
+          @click="formSubmit"
+        >
+          Submit Lyrics
+        </button>
+      </div>
+    </form>
+    <teleport to="body">
+      <base-dialog :show="isSuccess" />
+    </teleport>
+  </div>
 </template>
 
 <script>
 import gql from "graphql-tag";
 import BaseInput from "../components/BaseInput.vue";
-import BaseDialog from '../components/BaseDialog.vue'
+import BaseDialog from "../components/BaseDialog.vue";
 export default {
   data() {
     return {
@@ -79,12 +89,12 @@ export default {
         "other",
       ],
       selectedSource: "from another website",
-      isSuccess: false
+      isSuccess: false,
     };
   },
   components: {
     BaseInput,
-    BaseDialog
+    BaseDialog,
   },
   methods: {
     formSubmit() {
@@ -116,17 +126,16 @@ export default {
             },
           })
           .then(() => {
-            this.isSuccess = true
+            this.isSuccess = true;
             setTimeout(() => {
-              this.$router.push({name: 'home'});
+              this.$router.push({ name: "home" });
             }, 1000);
           })
           .catch((error) => {
             console.log(error);
           });
-      }
-      else{
-        alert('Check input again')
+      } else {
+        alert("Check input again");
       }
     },
     validateInput() {
@@ -140,5 +149,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/request';
+@import "@/assets/scss/request";
 </style>

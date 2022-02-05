@@ -160,7 +160,7 @@
       <div class="hidden">
         <ul class="nav-footer">
           <li :class="{ active: this.currentRoute('request') }">
-            <router-link :to="{ name: 'request' }">Submit A Lyric</router-link>
+            <router-link :to="{ name: 'request' }" style="color: var(--green)">Submit Song Lyrics</router-link>
           </li>
           <li>
             &copy; 2022
