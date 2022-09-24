@@ -1,12 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import Home from "./layouts/Home";
-const NewRequest = () => import("./pages/NewRequest")
-import NewSong from "./pages/NewSong";
-import BaseSong from "./components/BaseSong";
-import BaseArtist from "./components/BaseArtist";
-import AllArtists from "./pages/AllArtists";
-const RandomSong = () => import("./pages/RandomSong")
+import Home from "./layouts/Home.vue";
+const NewRequest = () => import("./pages/NewRequest.vue")
+const NewSong = import("./pages/NewSong.vue");
+const BaseSong = import("./components/BaseSong.vue");
+const BaseArtist = import("./components/BaseArtist.vue");
+const AllArtists = import("./pages/AllArtists.vue");
+const RandomSong = () => import("./pages/RandomSong.vue")
 
 const router = createRouter({
   history: createWebHistory(),

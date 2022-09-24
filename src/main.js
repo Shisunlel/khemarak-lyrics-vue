@@ -4,7 +4,7 @@ import App from "./App.vue";
 import apolloProvider from "../apollo.provider";
 import store from "./store";
 
-import TheSidebar from "./layouts/TheSidebar";
+import TheSidebar from "./layouts/TheSidebar.vue";
 
 const app = createApp(App);
 app.component("sidebar", TheSidebar);
