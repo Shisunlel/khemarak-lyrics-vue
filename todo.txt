@@ -5,3 +5,5 @@ Song Lyrics Page
 - songs from same album if exist
 - load more or paginate
 - youtube url (low chance)
+- song recognition api
+- voice search
