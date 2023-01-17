@@ -12,7 +12,7 @@
           <li
             class="nav-item"
             :class="{
-              active: currentRoute('songs') || currentRoute('song'),
+              active: this.currentRoute('songs') || this.currentRoute('song'),
             }"
           >
             <router-link :to="{ name: 'songs' }">
@@ -33,7 +33,7 @@
             </router-link>
           </li>
           <hr width="200px" />
-          <li class="nav-item" :class="{ active: currentRoute('home') }">
+          <li class="nav-item" :class="{ active: this.currentRoute('home') }">
             <a href="/shuffle">
               <svg
                 stroke-width="1.5"
@@ -73,7 +73,7 @@
             class="nav-item"
             :class="{
               active:
-                this.currentRoute('artists') || currentRoute('artist'),
+                this.currentRoute('artists') || this.currentRoute('artist'),
             }"
           >
             <router-link :to="{ name: 'artists' }">
@@ -99,7 +99,7 @@
 
       <div class="hidden">
         <ul class="nav-footer">
-          <li :class="{ active: currentRoute('request') }">
+          <li :class="{ active: this.currentRoute('request') }">
             <router-link :to="{ name: 'request' }" style="color: var(--green)">Submit Song Lyrics</router-link>
           </li>
           <li>
@@ -156,12 +156,12 @@
         <li
           class="nav-item"
           :class="{
-            active: currentRoute('songs') || currentRoute('song'),
+            active: this.currentRoute('songs') || this.currentRoute('song'),
           }"
         >
           <router-link :to="{ name: 'songs' }">Songs</router-link>
         </li>
-        <li class="nav-item" :class="{ active: currentRoute('home') }">
+        <li class="nav-item" :class="{ active: this.currentRoute('home') }">
           <a href="/shuffle">Shuffle</a>
         </li>
         <li
@@ -188,14 +188,26 @@
     </div>
   </nav>
 </template>
-<script setup>
-import { useRoute } from 'vue-router'
-import Logo from '@/assets/logo.svg?component';
-import { ref } from 'vue';
-const open = ref(false);
-const route = useRoute();
-const currentRoute = (name)  => route.name ===  name;
-const openDropdown = () => open.value  = !open.value;
+<script>
+import Logo from '/public/logo.svg'
+export default {
+  components: {
+    Logo,
+  },
+  data() {
+    return {
+      open: false,
+    };
+  },
+  methods: {
+    currentRoute(name) {
+      return this.$route.name == name;
+    },
+    openDropdown() {
+      this.open = !this.open;
+    },
+  },
+};
 </script>
 <style lang="scss" scoped>
 @import "@/assets/scss/sidebar.scss";
