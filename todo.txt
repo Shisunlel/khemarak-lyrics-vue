@@ -1,4 +1,8 @@
 Song Lyrics Page
+- use composition api
+- move to pinia
+- add typescript
+- add unit test
 - add contributor name
 - related songs from artist
 - artist description
