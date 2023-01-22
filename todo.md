@@ -1,13 +1,13 @@
 Song Lyrics Page
-- [] use composition api
+- [ ] use composition api
 - [x] move to pinia
-- [] add typescript
-- [] add unit test
-- [] add contributor name
-- [] related songs from artist
-- [] artist description
-- [] songs from same album if exist
-- [] load more or paginate
-- [] youtube url (low chance)
-- [] song recognition api
-- [] voice search
+- [ ] add typescript
+- [ ] add unit test
+- [ ] add contributor name
+- [ ] related songs from artist
+- [ ] artist description
+- [ ] songs from same album if exist
+- [ ] load more or paginate
+- [ ] youtube url (low chance)
+- [ ] song recognition api
+- [ ] voice search
