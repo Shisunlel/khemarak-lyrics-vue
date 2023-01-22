@@ -25,6 +25,8 @@
   </section>
 </template>
 <script>
+import { mapActions, mapState } from 'pinia';
+import { useArtistsStore } from '../store/artists';
 import BaseCard from "./BaseCard.vue";
 export default {
   props: ["name", "id"],
@@ -32,6 +34,9 @@ export default {
     BaseCard,
   },
   computed: {
+    ...mapState(useArtistsStore, {
+      songs: 'artistGetter',
+    }),
     artistName() {
       let words = this.name.split("-");
       for (let i = 0; i < words.length; i++) {
@@ -39,17 +44,15 @@ export default {
       }
       return words.join("-").replaceAll(/-/g, " ");
     },
-    songs() {
-      return this.$store.getters["artistModule/artist"];
-    },
   },
   async created() {
     return await this.getArtist();
   },
   methods: {
+    ...mapActions(useArtistsStore, ['fetchArtist']),
     async getArtist() {
       const data = { artist_id: Number(this.id) };
-      return this.$store.dispatch("artistModule/artist", data);
+      return this.fetchArtist(data);
     },
   },
 };

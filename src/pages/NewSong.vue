@@ -24,7 +24,9 @@
   </section>
 </template>
 <script>
+import { mapActions, mapState } from 'pinia';
 import BaseCard from "../components/BaseCard.vue";
+import { useDefaultStore } from '../store';
 export default {
   components: {
     BaseCard,
@@ -36,13 +38,16 @@ export default {
     };
   },
   computed: {
-    songs(){
-      return this.$store.getters['getSongs']
-    }
+    ...mapState(useDefaultStore, {
+      songs: 'getSongs',
+    }),
+  },
+  methods: {
+    ...mapActions(useDefaultStore, ['loadSongs'])
   },
   created(){
     this.title = this.$route.name == 'songs' ? 'All': 'New'
-    this.$store.dispatch('loadSongs')
+    this.loadSongs();
   }
 };
 </script>

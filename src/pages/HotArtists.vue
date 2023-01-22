@@ -18,7 +18,8 @@
   </section>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapActions, mapState } from "pinia";
+import { useDefaultStore } from '../store/index';
 import HotArtistCard from "../components/HotArtistCard.vue";
 export default {
   components: {
@@ -26,14 +27,14 @@ export default {
   },
   props: ["animate"],
   computed: {
-    ...mapGetters({
+    ...mapState(useDefaultStore, {
       hotArtists: "getHotArtists",
     }),
   },
   methods: {
-    async getHotArtists() {
-      return await this.$store.dispatch("loadHotArtists");
-    },
+    ...mapActions(useDefaultStore,{
+      getHotArtists: 'loadHotArtists',
+    }),
   },
   async created() {
     await this.getHotArtists();

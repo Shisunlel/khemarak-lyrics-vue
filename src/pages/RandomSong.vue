@@ -2,10 +2,11 @@
   <div></div>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapActions, mapState } from "pinia";
+import { useRandomStore } from '../store/random';
 export default {
   computed: {
-    ...mapGetters("randomModule", {
+    ...mapState(useRandomStore, {
       data: "getRandomData",
     }),
   },
@@ -20,9 +21,9 @@ export default {
     });
   },
   methods: {
-    async fetchRandom() {
-      return await this.$store.dispatch("randomModule/fetchRandomSong");
-    },
+    ...mapActions(useRandomStore, {
+      fetchRandom: 'fetchRandomSong',
+    }),
   },
 };
 </script>

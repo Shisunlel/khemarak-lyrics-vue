@@ -49,7 +49,6 @@
       <ul v-for="artist in artists" :key="artist.id">
         <li>
           <router-link
-            v-text="artist.name"
             :to="{
               name: 'artist',
               params: {
@@ -57,7 +56,7 @@
                 id: artist.id,
               },
             }"
-          ></router-link>
+          >{{ artist.name }}</router-link>
         </li>
       </ul>
     </div>

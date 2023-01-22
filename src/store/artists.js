@@ -1,27 +1,22 @@
-import apolloProvider from "../../../../apollo.provider";
+import { defineStore } from 'pinia';
+import apolloProvider from "../../apollo.provider";
 import gql from "graphql-tag";
 
 const apollo = apolloProvider.defaultClient;
 
-export default {
-  namespaced: true,
+export const useArtistsStore = defineStore('artists', {
   state() {
     return {
       artist: {},
     };
   },
   getters: {
-    artist(state) {
+    artistGetter(state) {
       return state.artist;
     },
   },
-  mutations: {
-    artist(state, payload) {
-      state.artist = payload;
-    },
-  },
   actions: {
-    async artist(context, payload) {
+    async fetchArtist(payload) {
       const data = await apollo.query({
         query: gql`
           query song($artist_id: ID!) {
@@ -52,7 +47,7 @@ export default {
           artist_id: payload.artist_id,
         },
       });
-      context.commit("artist", data.data?.artistSong);
+      this.artist = data.data?.artistSong;
     },
   },
-};
+});

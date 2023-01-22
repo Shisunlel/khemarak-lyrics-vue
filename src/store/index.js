@@ -1,18 +1,10 @@
-import { createStore } from "vuex";
-import randomModule from "./modules/random";
-import songModule from "./modules/songs";
-import artistModule from "./modules/artists";
+import { defineStore } from "pinia";
 import apolloProvider from "../../apollo.provider";
 import gql from "graphql-tag";
 
 const apollo = apolloProvider.defaultClient;
 
-const store = createStore({
-  modules: {
-    randomModule,
-    songModule,
-    artistModule,
-  },
+export const useDefaultStore = defineStore('default', {
   state() {
     return {
       allArtists: [],
@@ -63,23 +55,9 @@ const store = createStore({
       return (now - state.lastFetch.song) / 1000 > 60
     }
   },
-  mutations: {
-    setAllArtists(state, payload) {
-      (state.allArtists = payload);
-    },
-    setHotArtists(state, payload) {
-      (state.hotArtists = payload);
-    },
-    setSongs(state, payload) {
-      (state.songs = payload);
-    },
-    setFetchTimestamp(state, key){
-      state.lastFetch[key] = new Date().getTime()
-    }
-  },
   actions: {
-    async loadAllArtists(context) {
-      if(!context.getters.shouldUpdateArtist){
+    async loadAllArtists() {
+      if(!this.shouldUpdateArtist){
         return
       }
       const data = await apollo.query({
@@ -96,11 +74,11 @@ const store = createStore({
           }
         `,
       });
-      context.commit("setAllArtists", data.data?.artists);
-      context.commit('setFetchTimestamp', 'artist')
+      this.allArtists = data.data?.artists;
+      this.lastFetch['artist'] = new Date().getTime()
     },
-    async loadHotArtists(context) {
-      if(!context.getters.shouldUpdateHotArtist){
+    async loadHotArtists() {
+      if(!this.shouldUpdateHotArtist){
         return
       }
       const data = await apollo.query({
@@ -115,11 +93,11 @@ const store = createStore({
           }
         `,
       });
-      context.commit("setHotArtists", data.data?.getHotArtists);
-      context.commit('setFetchTimestamp', 'hotArtist')
+      this.hotArtists = data.data?.getHotArtists
+      this.lastFetch['hotArtist'] = new Date().getTime()
     },
-    async loadSongs(context) {
-      if(!context.getters.shouldUpdateSong){
+    async loadSongs() {
+      if(!this.shouldUpdateSong){
         return
       }
 
@@ -149,10 +127,8 @@ const store = createStore({
           }
         `,
       });
-      context.commit("setSongs", data.data?.songs);
-      context.commit('setFetchTimestamp', 'song')
+      this.songs = data.data?.songs;
+      this.lastFetch['song'] = new Date().getTime()
     },
   },
 });
-
-export default store;

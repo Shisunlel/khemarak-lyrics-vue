@@ -1,15 +1,15 @@
-import apolloProvider from "../../../../apollo.provider";
-import gql from "graphql-tag";
+import apolloProvider from '../../apollo.provider';
+import gql from 'graphql-tag';
+import { defineStore } from 'pinia';
 
 const apollo = apolloProvider.defaultClient;
 
-export default {
-  namespaced: true,
+export const useRandomStore = defineStore('random', {
   state() {
     return {
       random: {
-        artist: "",
-        title: "",
+        artist: '',
+        title: '',
       },
     };
   },
@@ -18,16 +18,8 @@ export default {
       return state.random;
     },
   },
-  mutations: {
-    getRandomSong(state, payload) {
-      state.random = {
-        artist: payload.artist.parse_name,
-        title: payload.parse_title,
-      };
-    },
-  },
   actions: {
-    async fetchRandomSong(context) {
+    async fetchRandomSong(payload) {
       const data = await apollo.query({
         query: gql`
           query {
@@ -41,8 +33,11 @@ export default {
         `,
       });
       if (data.data?.getRandomSong) {
-        context.commit("getRandomSong", data.data?.getRandomSong);
+        this.random = {
+          artist: payload.artist.parse_name,
+          title: payload.parse_title,
+        };
       }
     },
   },
-};
+});

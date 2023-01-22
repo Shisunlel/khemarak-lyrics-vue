@@ -189,7 +189,7 @@
   </nav>
 </template>
 <script>
-import Logo from '/public/logo.svg'
+import Logo from '@/assets/logo.svg'
 export default {
   components: {
     Logo,

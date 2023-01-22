@@ -22,24 +22,26 @@
   </section>
 </template>
 <script>
+import { mapActions, mapState } from 'pinia';
 import HotArtistCard from "../components/HotArtistCard.vue";
+import { useDefaultStore } from '../store';
 export default {
   components: {
     HotArtistCard,
   },
   props: ["animate"],
   computed: {
-    artists(){
-      return this.$store.getters['getAllArtist']
-    }
+    ...mapState(useDefaultStore, {
+      artists: 'getAllArtist',
+    }),
   },
   async created(){
     await this.fetchData()
   },
   methods: {
-    async fetchData(){
-      await this.$store.dispatch('loadAllArtists')
-    }
+    ...mapActions(useDefaultStore, {
+      fetchData: 'loadAllArtists',
+    }),
   }
 };
 </script>

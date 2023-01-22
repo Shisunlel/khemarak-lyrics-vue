@@ -18,24 +18,27 @@
   </div>
 </template>
 <script>
-import gql from "graphql-tag";
+import { mapActions, mapState } from 'pinia';
+import { useSongStore } from '../store/songs';
+
 export default {
   props: ["artist", "title"],
   computed: {
-    song() {
-      return this.$store.getters["songModule/song"];
-    },
+    ...mapState(useSongStore, {
+      song: 'songGetter',
+    }),
   },
   async created() {
     return await this.getSong();
   },
   methods: {
+    ...mapActions(useSongStore, ['fetchSong']),
     async getSong() {
       const data = {
         artist: this.artist,
         title: this.title,
       };
-      return await this.$store.dispatch("songModule/song", data);
+      return await this.fetchSong(data);
     },
   },
 };
